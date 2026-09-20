@@ -1,0 +1,36 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>dev.eaji.comment</id>
+
+    <!-- Public plugin name should be written in Title Case.
+     Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-name -->
+    <name>Comment (Kary Comments)</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="emerikaji@gmail.com">Emerik</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
+    <description><![CDATA[
+    Implementation of <a href="https://github.com/pouyakary/coding-standards">Kary Coding Standards</a> comments for IntelliJ-based IDEs.
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extensions defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+        <action id="CreateComment" class="dev.eaji.CreateComment" text="Create Title Comment">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt Y"/>
+        </action>
+        <action id="CreateSep" class="dev.eaji.CreateSep" text="Create Separator">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt L"/>
+        </action>
+    </actions>
+</idea-plugin>

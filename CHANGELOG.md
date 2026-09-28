@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 28/09/2026
+
+### Changed
+
+- Indentation now matches visual length set in editor settings.
+
 ## [0.1.1] - 20-09-2026
 
 ### Added

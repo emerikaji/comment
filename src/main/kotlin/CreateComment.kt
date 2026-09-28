@@ -26,7 +26,6 @@ class CreateComment : AnAction() {
         val endOffset = document.getLineEndOffset(lineNumber)
 
         val fullLine = document.getText(TextRange(startOffset, endOffset))
-        val leadingIndent = fullLine.takeWhile { it.isWhitespace() }
         val rawText = fullLine.trim()
 
         if (rawText.isEmpty()) {
@@ -42,9 +41,13 @@ class CreateComment : AnAction() {
             word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
         }
 
+        val tabSize = editor.settings.getTabSize(project)
+        val leadingIndent = fullLine.takeWhile { it.isWhitespace() }
+        val indentVisualWidth = leadingIndent.visualColumnWidth(tabSize)
+
         // Deduct indent for starting offset and ending offset
-        val nonFillLength = (leadingIndent.length * 2) + commentStart.length + 1 + formattedTitle.length + 1 + commentEnd.length
-        val fillLength = baseWidth - nonFillLength
+        val nonFillVisualWidth = (indentVisualWidth * 2) + commentStart.length + 1 + formattedTitle.length + 1 + commentEnd.length
+        val fillLength = baseWidth - nonFillVisualWidth
 
         if (fillLength < 1) {
             HintManager.getInstance().showInformationHint(editor, "Comment text is too long for this indentation level.")

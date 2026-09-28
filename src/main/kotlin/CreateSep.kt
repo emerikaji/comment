@@ -26,9 +26,11 @@ class CreateSep : AnAction() {
 
         val fullLine = document.getText(TextRange(startOffset, endOffset))
         val leadingIndent = fullLine.takeWhile { it.isWhitespace() }
+        val tabSize = editor.settings.getTabSize(project)
+        val indentVisualWidth = leadingIndent.visualColumnWidth(tabSize)
 
         // Deduct indent for starting offset and ending offset
-        val fillLength = baseWidth - (leadingIndent.length * 2) - prefix.length
+        val fillLength = baseWidth - (indentVisualWidth * 2) - prefix.length
 
         if (fillLength < 1) {
             HintManager.getInstance().showInformationHint(editor, "Indentation is too deep for target width.")
